@@ -7,33 +7,47 @@
 
         System.Int32 CantElem = 0;
 
-
+        public System.String CargarLista(System.String aNombre,
+                                         System.String aPrecio)
+        {
+            System.String mRes = "";
+            System.Decimal mPrecio = System.Convert.ToDecimal(aPrecio);
+            this.CargarLista(aNombre, mPrecio);
+            return mRes;
+        }
         /// <summary>
         /// carga un elemento nuevo a la lista
         /// </summary>
         /// <param name="aElemento">Elemento a cargar en la lista</param>
         /// <returns></returns>
         public System.String CargarLista(System.String aNombre,
-                                         System.String aPrecio)
+                                         System.Decimal mPrecio)
         {
             System.String mRes = "";
-            System.Decimal mPrecio = System.Convert.ToDecimal(aPrecio);
-            
-            if (CantElem == Nombre.Length)
+            try
             {
-                Nombre = RedimensionarStr(Nombre);
-                Precio = RedimensionarDec(Precio);
+                
+                if (CantElem == Nombre.Length)
+                {
+                    Nombre = RedimensionarStr(Nombre);
+                    Precio = RedimensionarDec(Precio);
+                }
+                if (BuscaPorNombre(aNombre) == -1)
+                {
+                    Nombre[CantElem] = aNombre;
+                    Precio[CantElem] = mPrecio;
+                    CantElem++;
+                    mRes = Listado();
+                }
+                else
+                {
+                    mRes = "El elemento " + aNombre + " ya existe";
+                }
             }
-            if (BuscaPorNombre(aNombre) == -1)
+            catch (System.Exception err)
             {
-                Nombre[CantElem] = aNombre;
-                Precio[CantElem] = mPrecio;
-                CantElem++;
-                mRes = Listado();
-            }
-            else
-            {
-                mRes = "El elemento " + aNombre + " ya existe";
+                
+                throw err;
             }
             return mRes;
         }

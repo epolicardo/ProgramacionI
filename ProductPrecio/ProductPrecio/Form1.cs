@@ -19,8 +19,16 @@ namespace ProductPrecio
 
         private void btAgregar_Click(object sender, EventArgs e)
         {
-            label1.Text= ListaPrecio.CargarLista(txtProducto.Text, txtPrecio.Text);
-            
+            try
+            {
+                label1.Text = ListaPrecio.CargarLista(
+                    txtProducto.Text, 
+                    txtPrecio.Text);
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show("Error: " + er.Message);
+            }
         }
     }
 }
