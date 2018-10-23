@@ -7,19 +7,25 @@
 
         System.Int32 CantElem = 0;
 
+        /// <summary>
+        /// SOBRECARGA: carga un elemento nuevo a la lista
+        /// </summary>
+        /// <param name="aNombre">Elemento a cargar en la lista</param>
+        /// <param name="aPrecio">Precio del elemento en string</param>
         public System.String CargarLista(System.String aNombre,
-                                         System.String aPrecio)
+                                                 System.String aPrecio)
         {
             System.String mRes = "";
             System.Decimal mPrecio = System.Convert.ToDecimal(aPrecio);
-            this.CargarLista(aNombre, mPrecio);
+            mRes = this.CargarLista(aNombre, mPrecio);
             return mRes;
         }
+
         /// <summary>
         /// carga un elemento nuevo a la lista
         /// </summary>
-        /// <param name="aElemento">Elemento a cargar en la lista</param>
-        /// <returns></returns>
+        /// <param name="aNombre">Elemento a cargar en la lista</param>
+        /// <param name="aPrecio">Precio del elemento en decimal</param>
         public System.String CargarLista(System.String aNombre,
                                          System.Decimal mPrecio)
         {
@@ -37,6 +43,11 @@
                     Nombre[CantElem] = aNombre;
                     Precio[CantElem] = mPrecio;
                     CantElem++;
+                    if (Nombre.Length > 2)
+                    {
+                        this.Ordenar();
+                    }
+                    
                     mRes = Listado();
                 }
                 else
@@ -130,6 +141,24 @@
             }
 
             return Res;
+        }
+
+        public void Ordenar()
+        {
+            for (int i = 0; i < Nombre.Length; i++)
+            {
+                for (int j = -1; i < Nombre.Length; j--)
+                {
+                    if(Nombre[j].CompareTo(Nombre[j+1])<0)
+                    {
+                        string aux = Nombre[j];
+                        Nombre[j] = Nombre[j+1];
+                        Nombre[j+1] = aux;
+                    }
+                    
+                }
+            }
+
         }
     }
 }
